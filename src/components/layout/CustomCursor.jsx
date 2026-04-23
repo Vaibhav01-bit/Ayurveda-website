@@ -5,7 +5,6 @@ export default function CustomCursor() {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  // Add smoothing to the cursor movement
   const springConfig = { damping: 25, stiffness: 250 };
   const smoothX = useSpring(mouseX, springConfig);
   const smoothY = useSpring(mouseY, springConfig);
@@ -25,11 +24,14 @@ export default function CustomCursor() {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 w-6 h-6 border-2 border-saffron rounded-full pointer-events-none z-[9999] mix-blend-difference hidden lg:block"
+      className="fixed top-0 left-0 w-6 h-6 border-2 border-saffron rounded-full pointer-events-none z-[9999] mix-blend-difference hidden lg:block pointer-events-none"
       style={{
         x: smoothX,
         y: smoothY,
       }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.2 }}
     />
   );
 }
